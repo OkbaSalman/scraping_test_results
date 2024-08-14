@@ -23,7 +23,11 @@ const puppeteer = require("puppeteer");
   let previousData = null;
 
   while (true) {
-    const browser = await puppeteer.launch({ headless: true });
+    const browser = await puppeteer.launch({ args: ["--no-sandbox", "--disable-setuid-sandbox", "--no-zygote"],headless: true,
+      executablePath:
+        process.env.NODE_ENV === "production"
+          ? process.env.PUPPETEER_EXECUTABLE_PATH
+          : puppeteer.executablePath(), });
     const page = await browser.newPage();
 
     function delay(time) {
