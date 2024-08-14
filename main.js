@@ -68,7 +68,7 @@ const puppeteer = require("puppeteer");
         previousData = [...data];
       } else {
         console.log("No new data found.");
-        sendNotification(previousData.toString().replace(/,/g, "\n"));
+        //sendNotification(previousData.toString().replace(/,/g, "\n"));
       }
     }
 
