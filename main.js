@@ -1,4 +1,19 @@
 require("dotenv").config();
+
+const express = require("express");
+const app = express();
+
+const PORT = process.env.PORT || 4000;
+
+app.listen(PORT, () => {
+  console.log(`Listening on port ${PORT}`);
+});
+
+app.get("/", (req, res) => {
+  res.send("Render puppeteer server is up and running!");
+});
+
+
 const TelegramBot = require("node-telegram-bot-api");
 
 const token = process.env.TELEGRAM_BOT_TOKEN;
