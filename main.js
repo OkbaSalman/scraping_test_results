@@ -40,6 +40,11 @@ const puppeteer = require("puppeteer");
   while (true) {
     let browser, page;
     try {
+      function delay(time) {
+        return new Promise(function (resolve) {
+          setTimeout(resolve, time);
+        });
+      }
       browser = await puppeteer.launch({
         args: ["--no-sandbox", "--disable-setuid-sandbox", "--no-zygote"],
         headless: true,
@@ -48,19 +53,18 @@ const puppeteer = require("puppeteer");
             ? process.env.PUPPETEER_EXECUTABLE_PATH
             : puppeteer.executablePath(),
       });
+      await delay(1000);
       page = await browser.newPage();
 
-      function delay(time) {
-        return new Promise(function (resolve) {
-          setTimeout(resolve, time);
-        });
-      }
+      await delay(1000);
 
       page.setDefaultNavigationTimeout(90000);
       page.setDefaultTimeout(90000);
 
       await page.goto("https://tishreen.edu.sy/ar/Schedual/Results");
 
+      await delay(1000);
+      
       await page.select("[name=facultyId]", "51");
       await page.select("[name=studyYearId]", "11");
       await page.select("[name=semesterId]", "2");
