@@ -5,6 +5,16 @@ const app = express();
 
 const PORT = process.env.PORT || 4000;
 
+process.on("uncaughtException", (err) => {
+  console.error("Uncaught Exception:", err);
+  // Optionally, restart the process or log the error for further analysis
+});
+
+process.on("unhandledRejection", (reason, promise) => {
+  console.error("Unhandled Rejection:", reason);
+  // Optionally, restart the process or log the error for further analysis
+});
+
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
 });
