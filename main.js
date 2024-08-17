@@ -72,6 +72,7 @@ const puppeteer = require("puppeteer");
   while (true) {
     try {
       await page.reloud();
+      await page.waitForNavigation()
       await delay(1000);
       console.log(process.memoryUsage());
       await page.select("[name=facultyId]", "51");
