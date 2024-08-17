@@ -71,7 +71,7 @@ const puppeteer = require("puppeteer");
   await delay(1000);
   while (true) {
     try {
-      await page.reloud();
+      await page.reload();
       await page.waitForNavigation()
       await delay(1000);
       console.log(process.memoryUsage());
