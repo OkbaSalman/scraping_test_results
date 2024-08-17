@@ -5,7 +5,10 @@
   "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "npm install"
+    "build": "npm install",
+    "start-pm2": "pm2 start main.js",
+    "start-logs": "pm2 logs",
+    "start": "npm run start-pm2 && npm run start-logs"
   },
   "keywords": [],
   "author": "",
@@ -14,6 +17,7 @@
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "node-telegram-bot-api": "^0.66.0",
+    "pm2": "^5.4.2",
     "puppeteer": "^23.1.0"
   }
 }
