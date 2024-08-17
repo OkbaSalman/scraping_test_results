@@ -63,8 +63,18 @@ const puppeteer = require("puppeteer");
 
   await delay(1000);
 
-  page.setDefaultNavigationTimeout(90000);
-  page.setDefaultTimeout(90000);
+  page.setDefaultNavigationTimeout(120000);
+  page.setDefaultTimeout(120000);
+
+  await page.setRequestInterception(true);
+
+  page.on("request", (req) => {
+    if (req.resourceType() === "image") {
+      req.abort();
+    } else {
+      req.continue();
+    }
+  });
 
   await page.goto("https://tishreen.edu.sy/ar/Schedual/Results");
 
@@ -111,6 +121,6 @@ const puppeteer = require("puppeteer");
     }
 
     // Delay before the next loop iteration
-    await delay(2000);
+    await delay(4000);
   }
 })();
