@@ -121,6 +121,6 @@ const puppeteer = require("puppeteer");
     }
 
     // Delay before the next loop iteration
-    await delay(4000);
+    await delay(8000);
   }
 })();
