@@ -50,29 +50,30 @@ const puppeteer = require("puppeteer");
       setTimeout(resolve, time);
     });
   }
+  browser = await puppeteer.launch({
+    args: ["--no-sandbox", "--disable-setuid-sandbox", "--no-zygote"],
+    headless: true,
+    executablePath:
+      process.env.NODE_ENV === "production"
+        ? process.env.PUPPETEER_EXECUTABLE_PATH
+        : puppeteer.executablePath(),
+  });
+  await delay(1000);
+  page = await browser.newPage();
+
+  await delay(1000);
+
+  page.setDefaultNavigationTimeout(90000);
+  page.setDefaultTimeout(90000);
+
+  await page.goto("https://tishreen.edu.sy/ar/Schedual/Results");
+
+  await delay(1000);
   while (true) {
-    let browser, page;
     try {
-      browser = await puppeteer.launch({
-        args: ["--no-sandbox", "--disable-setuid-sandbox", "--no-zygote"],
-        headless: true,
-        executablePath:
-          process.env.NODE_ENV === "production"
-            ? process.env.PUPPETEER_EXECUTABLE_PATH
-            : puppeteer.executablePath(),
-      });
+      await page.reloud();
       await delay(1000);
-      page = await browser.newPage();
-
-      await delay(1000);
-
-      page.setDefaultNavigationTimeout(90000);
-      page.setDefaultTimeout(90000);
-
-      await page.goto("https://tishreen.edu.sy/ar/Schedual/Results");
-
-      await delay(1000);
-
+      console.log(process.memoryUsage());
       await page.select("[name=facultyId]", "51");
       await page.select("[name=studyYearId]", "11");
       await page.select("[name=semesterId]", "2");
