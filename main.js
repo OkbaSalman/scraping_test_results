@@ -50,7 +50,7 @@ const puppeteer = require("puppeteer");
       setTimeout(resolve, time);
     });
   }
-  browser = await puppeteer.launch({
+  const browser = await puppeteer.launch({
     args: ["--no-sandbox", "--disable-setuid-sandbox", "--no-zygote"],
     headless: true,
     executablePath:
@@ -59,7 +59,7 @@ const puppeteer = require("puppeteer");
         : puppeteer.executablePath(),
   });
   await delay(1000);
-  page = await browser.newPage();
+  const page = await browser.newPage();
 
   await delay(1000);
 
