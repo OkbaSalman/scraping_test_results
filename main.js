@@ -106,16 +106,8 @@ const puppeteer = require("puppeteer");
           //sendNotification(previousData.toString().replace(/,/g, "\n"));
         }
       }
-
-      await browser.close();
     } catch (error) {
-      console.error("Error occurred, retrying...", error);
-      if (browser) {
-        await browser.close();
-      }
-      // Retry after a short delay
-      await delay(5000);
-      continue;
+      console.error("Error occurred, ", error);
     }
 
     // Delay before the next loop iteration
