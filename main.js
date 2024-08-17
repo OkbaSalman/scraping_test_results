@@ -23,7 +23,6 @@ app.get("/", (req, res) => {
   res.send("Render puppeteer server is up and running!");
 });
 
-
 const TelegramBot = require("node-telegram-bot-api");
 
 const token = process.env.TELEGRAM_BOT_TOKEN;
@@ -46,15 +45,14 @@ const puppeteer = require("puppeteer");
 
 (async () => {
   let previousData = null;
-
+  function delay(time) {
+    return new Promise(function (resolve) {
+      setTimeout(resolve, time);
+    });
+  }
   while (true) {
     let browser, page;
     try {
-      function delay(time) {
-        return new Promise(function (resolve) {
-          setTimeout(resolve, time);
-        });
-      }
       browser = await puppeteer.launch({
         args: ["--no-sandbox", "--disable-setuid-sandbox", "--no-zygote"],
         headless: true,
@@ -74,7 +72,7 @@ const puppeteer = require("puppeteer");
       await page.goto("https://tishreen.edu.sy/ar/Schedual/Results");
 
       await delay(1000);
-      
+
       await page.select("[name=facultyId]", "51");
       await page.select("[name=studyYearId]", "11");
       await page.select("[name=semesterId]", "2");
@@ -115,11 +113,11 @@ const puppeteer = require("puppeteer");
         await browser.close();
       }
       // Retry after a short delay
-      await new Promise((resolve) => setTimeout(resolve, 5000));
+      await delay(5000);
       continue;
     }
 
     // Delay before the next loop iteration
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    await delay(2000);
   }
 })();
