@@ -8,7 +8,7 @@
     "build": "npm install",
     "start-pm2": "pm2 start main.js",
     "start-logs": "pm2 logs",
-    "start": "npm run start-pm2 && npm run start-logs"
+    "start": "node main.js"
   },
   "keywords": [],
   "author": "",
