@@ -7,12 +7,10 @@ const PORT = process.env.PORT || 4000;
 
 process.on("uncaughtException", (err) => {
   console.error("Uncaught Exception:", err);
-  // Optionally, restart the process or log the error for further analysis
 });
 
 process.on("unhandledRejection", (reason, promise) => {
   console.error("Unhandled Rejection:", reason);
-  // Optionally, restart the process or log the error for further analysis
 });
 
 app.listen(PORT, () => {
@@ -119,8 +117,6 @@ const puppeteer = require("puppeteer");
     } catch (error) {
       console.error("Error occurred, ", error);
     }
-
-    // Delay before the next loop iteration
     await delay(8000);
   }
 })();
